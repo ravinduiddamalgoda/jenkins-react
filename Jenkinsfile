@@ -23,13 +23,29 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    echo 'Deploying application...'
-                    // Define deployment directory
-                    def deploymentDir = '/var/www/contact-us-bmc-car'
-
-                    // Copy build files to the deployment directory
-                    sh "cp -r build/* ${deploymentDir}"
-
+                    echo 'Deploying application with Apache HTTPD...'
+                    
+                    // Define the path to the Apache web server directory
+                    def apacheDir = '/var/www/html'
+                    
+                    // Ensure Apache HTTPD is installed and running
+                    sh '''
+                    sudo yum install -y httpd
+                    sudo systemctl start httpd
+                    sudo systemctl enable httpd
+                    '''
+                    
+                    // Clean the Apache directory (optional, depending on your use case)
+                    sh "sudo rm -rf ${apacheDir}/*"
+                    
+                    // Copy the build files to Apache's web directory
+                    sh "sudo cp -r build/* ${apacheDir}/"
+                    
+                    // Set correct permissions for the files
+                    sh "sudo chown -R apache:apache ${apacheDir}"
+                    
+                    // Restart Apache to reflect changes
+                    sh 'sudo systemctl restart httpd'
                 }
             }
         }
