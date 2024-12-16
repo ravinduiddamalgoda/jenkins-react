@@ -39,7 +39,7 @@ pipeline {
                     // sh "echo 'password' | sudo -S rm -rf ${apacheDir}/*"
                     
                     // Copy the build files to Apache's web directory
-                    sh "sudo cp -r build/* ${apacheDir}/"
+                    sh "echo 'password' | sudo cp -r build/* ${apacheDir}/"
                     
                     // Set correct permissions for the files
                     sh "echo 'password' | sudo -S chown -R apache:apache ${apacheDir}"
