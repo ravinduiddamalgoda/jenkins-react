@@ -42,7 +42,7 @@ pipeline {
                     sh "echo 'password' | sudo -S cp -r build/* ${apacheDir}/"
                     
                     // Set correct permissions for the files
-                    sh "echo 'password' | sudo -S chown -R apache:apache ${apacheDir}"
+                    sh "echo 'admin' | sudo -S chown -R apache:apache ${apacheDir}"
                     
                     // Restart Apache to reflect changes
                     sh "echo 'password' | sudo -S systemctl restart httpd"
