@@ -36,7 +36,7 @@ pipeline {
                     '''
                     
                     // Clean the Apache directory (optional, depending on your use case)
-                    sh "echo 'password' | sudo -S rm -rf ${apacheDir}/*"
+                    // sh "echo 'password' | sudo -S rm -rf ${apacheDir}/*"
                     
                     // Copy the build files to Apache's web directory
                     sh "sudo cp -r build/* ${apacheDir}/"
