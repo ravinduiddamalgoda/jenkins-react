@@ -28,24 +28,24 @@ pipeline {
                     // Define the path to the Apache web server directory
                     def apacheDir = '/var/www/html'
                     
-                    // Install Apache HTTPD and start the service
+                    // Use the password to install Apache HTTPD and start the service
                     sh '''
                     echo "password" | sudo -S yum install -y httpd
-                    sudo systemctl start httpd
-                    sudo systemctl enable httpd
+                    echo "password" | sudo -S systemctl start httpd
+                    echo "password" | sudo -S systemctl enable httpd
                     '''
                     
                     // Clean the Apache directory (optional, depending on your use case)
-                    sh "sudo rm -rf ${apacheDir}/*"
+                    sh "echo 'password' | sudo -S rm -rf ${apacheDir}/*"
                     
                     // Copy the build files to Apache's web directory
-                    sh "sudo cp -r build/* ${apacheDir}/"
+                    sh "echo 'password' | sudo -S cp -r build/* ${apacheDir}/"
                     
                     // Set correct permissions for the files
-                    sh "sudo chown -R apache:apache ${apacheDir}"
+                    sh "echo 'password' | sudo -S chown -R apache:apache ${apacheDir}"
                     
                     // Restart Apache to reflect changes
-                    sh 'sudo systemctl restart httpd'
+                    sh "echo 'password' | sudo -S systemctl restart httpd"
                 }
             }
         }
