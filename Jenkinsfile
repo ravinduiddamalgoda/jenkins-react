@@ -28,7 +28,7 @@ pipeline {
                     // Define the path to the Apache web server directory
                     def apacheDir = '/var/www/html'
                     
-                    // Ensure Apache HTTPD is installed and running
+                    // Install Apache HTTPD and start the service
                     sh '''
                     sudo yum install -y httpd
                     sudo systemctl start httpd
