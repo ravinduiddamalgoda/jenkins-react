@@ -27,25 +27,25 @@ pipeline {
                     
                     // Define the path to the Apache web server directory
                     def apacheDir = '/var/www/html'
-                    
-                    // Use the password to install Apache HTTPD and start the service
-                    sh '''
-                    echo "password" | sudo -S yum install -y httpd
-                    echo "password" | sudo -S systemctl start httpd
-                    echo "password" | sudo -S systemctl enable httpd
+
+                    // Use password-less sudo (ensure sudoers is configured for Jenkins)
+                    sh ''' 
+                    sudo yum install -y httpd
+                    sudo systemctl start httpd
+                    sudo systemctl enable httpd
                     '''
                     
                     // Clean the Apache directory (optional, depending on your use case)
-                    // sh "echo 'password' | sudo -S rm -rf ${apacheDir}/*"
+                    // sh "sudo rm -rf ${apacheDir}/*"
                     
                     // Copy the build files to Apache's web directory
-                    sh "echo 'password' | sudo cp -r build/* ${apacheDir}/"   
+                    sh "sudo cp -r build/* ${apacheDir}/"
                     
                     // Set correct permissions for the files
-                    sh "echo 'password' | sudo -S chown -R apache:apache ${apacheDir}"
+                    sh "sudo chown -R apache:apache ${apacheDir}"
                     
                     // Restart Apache to reflect changes
-                    sh "echo 'password' | sudo -S systemctl restart httpd"
+                    sh "sudo systemctl restart httpd"
                 }
             }
         }
