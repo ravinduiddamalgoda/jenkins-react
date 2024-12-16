@@ -39,13 +39,13 @@ pipeline {
                     // sh "sudo rm -rf ${apacheDir}/*"
                     
                     // Copy the build files to Apache's web directory
-                    sh "cp -r build/* ${apacheDir}/"
+                    sh "sudo cp -r build/* ${apacheDir}/"
                     
                     // Set correct permissions for the files
-                    sh "chown -R apache:apache ${apacheDir}"
+                    sh "sudo chown -R apache:apache ${apacheDir}"
                     
                     // Restart Apache to reflect changes
-                    sh 'systemctl restart httpd'
+                    sh 'sudo systemctl restart httpd'
                 }
             }
         }
