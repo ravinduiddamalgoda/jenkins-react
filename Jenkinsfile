@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git branch: 'main', url: 'https://github.com/chathurajayasank/contact-us-bmc-car.git'
+                git branch: 'main', url: 'https://github.com/ravinduiddamalgoda/jenkins-react.git'
             }
         }
         stage('Install Dependencies') {
