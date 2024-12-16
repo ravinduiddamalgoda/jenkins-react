@@ -29,14 +29,14 @@ pipeline {
                     def apacheDir = '/var/www/html'
                     
                     // Install Apache HTTPD and start the service
-                    sh '''
-                    sudo yum install -y httpd
-                    sudo systemctl start httpd
-                    sudo systemctl enable httpd
-                    '''
+                    // sh '''
+                    // sudo yum install -y httpd
+                    // sudo systemctl start httpd
+                    // sudo systemctl enable httpd
+                    // '''
                     
-                    // Clean the Apache directory (optional, depending on your use case)
-                    sh "sudo rm -rf ${apacheDir}/*"
+                    // // Clean the Apache directory (optional, depending on your use case)
+                    // sh "sudo rm -rf ${apacheDir}/*"
                     
                     // Copy the build files to Apache's web directory
                     sh "sudo cp -r build/* ${apacheDir}/"
