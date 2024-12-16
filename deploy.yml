@@ -1,0 +1,25 @@
+---
+- hosts: webservers
+  become: yes
+  tasks:
+    - name: Ensure deployment directory exists
+      file:
+        path: /var/www/contact-us-bmc-car
+        state: directory
+        owner: www-data
+        group: www-data
+        mode: '0755'
+
+    - name: Copy build files to the deployment directory
+      copy:
+        src: ./build/
+        dest: /var/www/contact-us-bmc-car
+        owner: www-data
+        group: www-data
+        mode: '0644'
+
+    - name: Restart Nginx
+      service:
+        name: nginx
+        state: restarted
+---
