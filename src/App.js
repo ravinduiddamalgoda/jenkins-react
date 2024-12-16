@@ -9,7 +9,7 @@ function App() {
     <div className="App">
       <Header />
       <main>
-        <h1>Contact Trust</h1>
+        <h1>Contact Trust V1</h1>
         <p>Reach out to us through the form below.</p>
         <ContactForm />
       </main>
